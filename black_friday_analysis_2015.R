@@ -5,8 +5,8 @@ library(timeDate)
 library(lubridate)
 library(plyr)
 
-#Extract sales information from dealer track
-#Filters that are applied: year 2010-2014, new sale, retail sale, and pricing ratio in [0.7,1.2]
+#Extract sales information from dealer track, table 'fct_alg_full' from 'cbook' database;
+#Filters that are applied: year 2010-2014, new sale, retail sale, and pricing ratio in [0.7,1.2];
 conn<-odbcConnect('mysql1','***','***') 
 t_nov_dec<-sqlQuery(conn,"select trans_date, actual_msrp, vehicle_price_net_rebate, new_used from fct_alg_full where vehicle_price_net_rebate<>'NULL' and actual_msrp<>'NULL'
                     and trans_date>='2010-01-01' and trans_date<='2014-12-31' and new_used in ('N','U') and sale_type in ('R')",stringsAsFactors=FALSE)
